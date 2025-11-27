@@ -1,182 +1,311 @@
 import React, { useState } from "react";
+import { motion } from "framer-motion";
+
+const resumeUrl = "/VISWESWARAIAH-RESUME.pdf";
+
+const projects = [
+  {
+    id: 1,
+    title: "Medical Report Generator (Capstone)",
+    date: "Jul 2023",
+    tech: "Python, Deep Learning, OpenCV",
+    summary:
+      "Built an AI-driven encoder–decoder model to generate automated medical reports from X-ray images, reducing manual report generation time.",
+    highlights: [
+      "Encoder–decoder pipeline for image→text report generation",
+      "Evaluated model performance with image-text matching metrics",
+    ],
+  },
+  {
+    id: 2,
+    title: "Secure Messaging System",
+    date: "Aug 2024",
+    tech: "React, Node.js, AES/RSA, JWT, WebSockets, MongoDB",
+    summary:
+      "Engineered a secure chat platform implementing AES and RSA hybrid encryption with JWT authentication and WebSocket-based real-time group messaging.",
+    highlights: [
+      "Hybrid AES+RSA encryption for message confidentiality",
+      "React front-end with WebSocket real-time messaging and session management",
+    ],
+  },
+  {
+    id: 3,
+    title: "Social Distancing Monitor",
+    date: "Jul 2022",
+    tech: "Python, OpenCV, YOLOv3",
+    summary:
+      "Real-time monitoring system using YOLOv3 to detect and measure pedestrian proximity from live camera feeds, producing alerts for unsafe distances.",
+    highlights: [
+      "YOLOv3-based detection with pixel-to-distance estimation",
+      "Realtime alerts and visual overlays for crowd analytics",
+    ],
+  },
+];
+
+const skills = [
+  "C",
+  "C++",
+  "Python",
+  "JavaScript",
+  "HTML",
+  "CSS",
+  "React",
+  "Node.js",
+  "MySQL",
+  "MongoDB",
+];
+
+const experience = [
+  {
+    company: "Florida International University",
+    role: "Teaching Assistant — Artificial Intelligence & Operating Systems",
+    date: "Aug 2024 - Present",
+    bullets: [
+      "Assisted teaching and labs for Artificial Intelligence and Operating Systems courses with 100+ students.",
+      "Mentored students on AI model implementation and optimization.",
+      "Collaborated with faculty to enhance lab materials emphasizing applied AI concepts.",
+    ],
+  },
+  {
+    company: "Aptean India",
+    role: "Associate Software Developer",
+    date: "Mar 2023 - Jul 2024",
+    bullets: [
+      "Identified and fixed software bugs to ensure system reliability.",
+      "Developed 4 new features based on business requirements within an Agile framework.",
+      "Worked across frontend, API, and backend systems; improved sprint delivery speed by ~10% through closer collaboration with product managers.",
+    ],
+  },
+];
 
 export default function App() {
-  const resumeUrl = "/mnt/data/VISWESWARAIAH-RESUME.pdf"; // local path (will be transformed by deploy)
-  const [activeProject, setActiveProject] = useState(null);
-
-  const projects = [
-    {
-      id: 1,
-      title: "Medical Report Generator (Capstone)",
-      date: "Jul 2023",
-      tech: "Python, Deep Learning, OpenCV",
-      summary:
-        "AI-driven encoder–decoder model that generates medical reports from X-ray images, reducing manual report time and demonstrating clinical viability.",
-      highlights: [
-        "Built an encoder–decoder pipeline for image→text report generation.",
-        "Evaluated using image-text matching metrics for validation.",
-      ],
-    },
-    {
-      id: 2,
-      title: "Secure Messaging System",
-      date: "Aug 2024",
-      tech: "React, Node.js, AES/RSA, JWT, WebSockets, MongoDB",
-      summary:
-        "End-to-end secure chat platform with AES+RSA encryption, JWT authentication and real-time WebSocket group messaging.",
-      highlights: [
-        "Implemented AES and RSA hybrid encryption for messages.",
-        "Built React UI and WebSocket-based real-time messaging with session management.",
-      ],
-    },
-    {
-      id: 3,
-      title: "Social Distancing Monitor",
-      date: "Jul 2022",
-      tech: "Python, OpenCV, YOLOv3",
-      summary:
-        "Real-time monitoring system using YOLOv3 to detect pedestrian proximity and produce visual alerts for violations.",
-      highlights: [
-        "Pixel-to-distance estimation to identify unsafe proximity.",
-        "Realtime detection and visual alerting for crowd analytics.",
-      ],
-    },
-  ];
-
-  const skills = [
-    "React", "Node.js", "Python", "C/C++", "JavaScript", "HTML & CSS", "MongoDB", "MySQL",
-  ];
-
-  const experience = [
-    {
-      company: "Florida International University",
-      role: "Teaching Assistant — Artificial Intelligence & Operating Systems",
-      date: "Aug 2024 - Present",
-      bullets: [
-        "Assisted labs & teaching for 100+ students in AI & OS courses.",
-        "Mentored students on model implementation & optimization.",
-        "Collaborated with faculty to improve lab materials.",
-      ],
-    },
-    {
-      company: "Aptean India",
-      role: "Associate Software Developer",
-      date: "Mar 2023 - Jul 2024",
-      bullets: [
-        "Fixed software bugs and developed 4 features in an Agile codebase.",
-        "Worked across frontend, API and backend systems.",
-        "Improved sprint delivery speed by ~10% through tighter requirement collaboration.",
-      ],
-    },
-  ];
+  const [active, setActive] = useState(null);
 
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-900 antialiased">
-      <header className="bg-white shadow-sm sticky top-0 z-30">
-        <div className="max-w-4xl mx-auto px-6 py-4 flex items-center justify-between">
+    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white text-slate-900">
+      {/* Header */}
+      <header className="sticky top-0 z-40 bg-white/70 backdrop-blur-md border-b border-slate-200">
+        <div className="max-w-5xl mx-auto px-6 py-3 flex items-center justify-between">
           <div>
-            <h1 className="text-xl font-semibold text-sky-700">Srushti Visweswaraiah</h1>
-            <p className="text-sm text-gray-600">MS Computer Science — AI & Software Development</p>
+            <h1 className="text-lg font-semibold text-sky-700">
+              Srushti Visweswaraiah
+            </h1>
+            <p className="text-xs text-slate-600">
+              MS Computer Science — AI & Software Development
+            </p>
           </div>
-          <nav className="hidden sm:flex gap-4 items-center">
-            <a href="#projects" className="text-sm hover:text-sky-700">Projects</a>
-            <a href="#experience" className="text-sm hover:text-sky-700">Experience</a>
-            <a href="#skills" className="text-sm hover:text-sky-700">Skills</a>
-            <a href="#contact" className="text-sm hover:text-sky-700">Contact</a>
+
+          <nav className="hidden md:flex gap-6 items-center text-sm">
+            <a href="#projects" className="hover:text-sky-700">
+              Projects
+            </a>
+            <a href="#skills" className="hover:text-sky-700">
+              Skills
+            </a>
+            <a href="#experience" className="hover:text-sky-700">
+              Experience
+            </a>
+            <a href="#contact" className="hover:text-sky-700">
+              Contact
+            </a>
             <a
               href={resumeUrl}
               download
-              className="ml-3 inline-block bg-sky-600 text-white text-sm px-3 py-2 rounded-md shadow-sm hover:bg-sky-700"
+              className="px-3 py-2 bg-gradient-to-r from-sky-600 to-violet-600 text-white rounded-lg shadow"
             >
-              Download CV
+              Resume
             </a>
           </nav>
+
+          <div className="md:hidden">
+            <a
+              href={resumeUrl}
+              download
+              className="px-3 py-2 bg-sky-600 text-white rounded-md"
+            >
+              CV
+            </a>
+          </div>
         </div>
       </header>
 
-      <main className="max-w-4xl mx-auto px-6 py-10">
-        {/* HERO */}
-        <section className="grid grid-cols-1 sm:grid-cols-3 gap-6 items-center">
-          <div className="sm:col-span-2">
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900">Frontend & AI-focused Software Developer</h2>
-            <p className="mt-3 text-gray-700 text-lg">
-              I build reliable, maintainable software and AI systems. Experienced across full-stack development, machine learning,
-              and teaching labs for university-level AI courses. Looking for roles that combine engineering rigor with applied AI.
-            </p>
+      {/* Main */}
+      <main className="max-w-5xl mx-auto px-6 py-12">
+        {/* Hero */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+          <div>
+            <motion.h2
+              initial={{ y: 12, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.6 }}
+              className="text-4xl sm:text-5xl font-extrabold leading-tight"
+            >
+              Hi, I'm{" "}
+              <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-600 to-violet-600">
+                Srushti
+              </span>{" "}
+              👋
+            </motion.h2>
 
-            <div className="mt-6 flex gap-3">
+            <motion.p
+              initial={{ y: 10, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ delay: 0.15, duration: 0.6 }}
+              className="mt-4 text-lg text-slate-700"
+            >
+              I build reliable, maintainable software and AI systems. Experienced across
+              full-stack development, machine learning, and teaching labs—focused on
+              delivering practical, production-ready solutions.
+            </motion.p>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.25 }}
+              className="mt-6 flex items-center gap-4"
+            >
+              <a
+                href="#projects"
+                className="px-5 py-3 bg-gradient-to-r from-sky-600 to-violet-600 text-white rounded-lg shadow-lg hover:scale-[1.03]"
+              >
+                View Projects
+              </a>
+
               <a
                 href={resumeUrl}
                 download
-                className="inline-flex items-center px-4 py-2 bg-sky-600 text-white rounded-md shadow-sm hover:bg-sky-700"
+                className="px-5 py-3 border border-slate-200 rounded-lg hover:bg-slate-50"
               >
                 Download Resume
               </a>
-              <a
-                href="mailto:svisw003@fiu.edu"
-                className="inline-flex items-center px-4 py-2 border border-sky-600 text-sky-600 rounded-md hover:bg-sky-50"
-              >
-                Email: svisw003@fiu.edu
-              </a>
-            </div>
+            </motion.div>
 
-            <div className="mt-6 text-sm text-gray-600">
-              <strong>Location:</strong> Miami, FL • <strong>LinkedIn:</strong>{" "}
-              <a
-                href="http://www.linkedin.com/in/srushti-v-9430291a2"
-                className="text-sky-600 hover:underline"
-                target="_blank"
-                rel="noreferrer"
-              >
-                linkedin.com/in/srushti-v-9430291a2
-              </a>
-            </div>
-          </div>
-
-          <div className="order-first sm:order-last flex items-center justify-center">
-            {/* Placeholder headshot card */}
-            <div className="w-40 h-40 bg-white rounded-xl shadow-md flex items-center justify-center">
-              <div className="text-center">
-                <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto" />
-                <p className="mt-3 text-sm text-gray-700">Professional Photo</p>
-                <p className="text-xs text-gray-400">(optional)</p>
+            <div className="mt-6 text-sm text-slate-600">
+              <div>
+                <strong>Email:</strong>{" "}
+                <a className="text-sky-600" href="mailto:svisw003@fiu.edu">
+                  svisw003@fiu.edu
+                </a>
+              </div>
+              <div className="mt-1">
+                <strong>LinkedIn:</strong>{" "}
+                <a
+                  className="text-sky-600"
+                  href="http://www.linkedin.com/in/srushti-v-9430291a2"
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  linkedin.com/in/srushti-v-9430291a2
+                </a>
+              </div>
+              <div className="mt-1">
+                <strong>Phone:</strong> +1 786-678-3505
               </div>
             </div>
           </div>
+
+          <motion.div
+            initial={{ scale: 0.95, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            className="relative"
+          >
+            <div className="absolute -right-10 -top-10 w-56 h-56 bg-sky-300/30 rounded-full filter blur-3xl mix-blend-multiply"></div>
+            <div className="absolute -left-8 top-24 w-48 h-48 bg-violet-300/30 rounded-full filter blur-3xl mix-blend-multiply"></div>
+
+            <div className="relative bg-white rounded-2xl p-6 shadow-xl border border-slate-100">
+              <div className="w-36 h-36 bg-gray-100 rounded-full mx-auto" />
+              <h3 className="text-center mt-4 font-semibold">Professional Photo</h3>
+              <p className="text-center text-xs text-slate-500">(optional)</p>
+            </div>
+          </motion.div>
         </section>
 
         {/* Skills */}
-        <section id="skills" className="mt-12">
-          <h3 className="text-2xl font-semibold text-gray-900">Skills</h3>
-          <p className="mt-2 text-gray-600">Technologies & tools I use regularly</p>
-
-          <div className="mt-4 flex flex-wrap gap-3">
+        <section id="skills" className="mt-20">
+          <h3 className="text-2xl font-bold text-slate-800">Skills</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-6">
             {skills.map((s) => (
-              <span
+              <motion.div
                 key={s}
-                className="inline-flex items-center px-3 py-1 rounded-full bg-white border text-sm text-gray-700 shadow-sm"
+                whileHover={{ scale: 1.03 }}
+                className="p-3 bg-white rounded-xl shadow border border-slate-100 text-center"
               >
                 {s}
-              </span>
+              </motion.div>
             ))}
           </div>
         </section>
 
-        {/* Experience */}
-        <section id="experience" className="mt-10">
-          <h3 className="text-2xl font-semibold text-gray-900">Experience</h3>
-          <div className="mt-4 space-y-6">
-            {experience.map((exp) => (
-              <div key={exp.company} className="p-4 bg-white rounded-lg shadow-sm">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h4 className="font-semibold text-gray-900">{exp.role}</h4>
-                    <div className="text-sm text-gray-600">{exp.company} • {exp.date}</div>
-                  </div>
+        {/* Projects */}
+        <section id="projects" className="mt-20">
+          <h3 className="text-2xl font-bold text-slate-800">Selected Projects</h3>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+            {projects.map((p) => (
+              <motion.article
+                key={p.id}
+                whileHover={{ y: -6 }}
+                className="p-5 bg-white border border-slate-200 shadow-md rounded-xl"
+              >
+                <div className="text-sm text-slate-500">{p.date}</div>
+                <h4 className="mt-2 font-semibold text-sky-700">{p.title}</h4>
+                <p className="mt-2 text-slate-700 text-sm">{p.summary}</p>
+                <div className="mt-3 text-xs text-slate-500">Tech: {p.tech}</div>
+                <div className="mt-3">
+                  <button
+                    onClick={() => setActive(p)}
+                    className="text-sky-600 text-sm"
+                  >
+                    Details
+                  </button>
                 </div>
-                <ul className="mt-3 list-disc list-inside text-gray-700">
-                  {exp.bullets.map((b, i) => (
-                    <li key={i}>{b}</li>
+              </motion.article>
+            ))}
+          </div>
+
+          {/* Modal */}
+          {active && (
+            <div
+              className="fixed inset-0 bg-black/40 flex items-center justify-center z-50"
+              onClick={() => setActive(null)}
+            >
+              <motion.div
+                initial={{ scale: 0.96, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.18 }}
+                className="bg-white rounded-lg max-w-2xl w-full p-6"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <div className="flex items-start justify-between">
+                  <h4 className="text-lg font-semibold">{active.title}</h4>
+                  <button onClick={() => setActive(null)} className="text-slate-500">
+                    Close
+                  </button>
+                </div>
+                <p className="mt-3 text-slate-700">{active.summary}</p>
+                <ul className="mt-3 list-disc list-inside text-slate-700">
+                  {active.highlights?.map((h, i) => (
+                    <li key={i}>{h}</li>
+                  ))}
+                </ul>
+                <div className="mt-4 text-sm text-slate-500">Tech: {active.tech}</div>
+              </motion.div>
+            </div>
+          )}
+        </section>
+
+        {/* Experience */}
+        <section id="experience" className="mt-20">
+          <h3 className="text-2xl font-bold text-slate-800">Experience</h3>
+          <div className="mt-6 space-y-6">
+            {experience.map((e, i) => (
+              <div key={i} className="p-5 bg-white border border-slate-200 rounded-xl shadow">
+                <h4 className="text-xl font-semibold text-sky-700">{e.role}</h4>
+                <div className="text-sm text-slate-500">{e.company} • {e.date}</div>
+                <ul className="mt-3 list-disc list-inside text-slate-700">
+                  {e.bullets.map((b, idx) => (
+                    <li key={idx}>{b}</li>
                   ))}
                 </ul>
               </div>
@@ -184,112 +313,44 @@ export default function App() {
           </div>
         </section>
 
-        {/* Projects */}
-        <section id="projects" className="mt-10">
-          <h3 className="text-2xl font-semibold text-gray-900">Selected Projects</h3>
-          <p className="mt-2 text-gray-600">A few projects that demonstrate applied AI and full-stack skills.</p>
-
-          <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4">
-            {projects.map((p) => (
-              <article
-                key={p.id}
-                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow cursor-pointer"
-                onClick={() => setActiveProject(p)}
-              >
-                <div className="text-sm text-gray-500">{p.date}</div>
-                <h4 className="mt-1 font-semibold text-gray-900">{p.title}</h4>
-                <p className="mt-2 text-gray-700 text-sm">{p.summary}</p>
-                <div className="mt-3 text-xs text-gray-500">Tech: {p.tech}</div>
-              </article>
-            ))}
-          </div>
-
-          {/* Project modal */}
-          {activeProject && (
-            <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50" onClick={() => setActiveProject(null)}>
-              <div className="bg-white rounded-lg max-w-2xl w-full p-6" onClick={(e) => e.stopPropagation()}>
-                <div className="flex justify-between items-start">
-                  <h4 className="text-lg font-semibold">{activeProject.title}</h4>
-                  <button onClick={() => setActiveProject(null)} className="text-gray-500">Close</button>
-                </div>
-                <div className="mt-3 text-gray-700">
-                  <p>{activeProject.summary}</p>
-                  <ul className="mt-3 list-disc list-inside">
-                    {activeProject.highlights.map((h, i) => (
-                      <li key={i}>{h}</li>
-                    ))}
-                  </ul>
-                  <div className="mt-4 text-sm text-gray-500">Tech stack: {activeProject.tech}</div>
-                </div>
-              </div>
-            </div>
-          )}
-        </section>
-
-        {/* Resume embed + Contact */}
-        <section id="contact" className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-white p-4 rounded-lg shadow-sm">
+        {/* Resume + Contact */}
+        <section id="contact" className="mt-20 grid grid-cols-1 md:grid-cols-2 gap-6 mb-20">
+          <div className="bg-white p-5 rounded-xl shadow border border-slate-200">
             <h3 className="text-lg font-semibold">Resume</h3>
-            <p className="mt-2 text-sm text-gray-600">Embedded preview — click download to save the PDF.</p>
-            <div className="mt-3">
-              <iframe
-                src={resumeUrl}
-                title="Resume"
-                className="w-full h-64 border rounded-md"
-              />
+            <p className="mt-1 text-slate-600">Preview or download the PDF.</p>
+            <div className="mt-4 flex gap-4 items-start">
+              <div className="w-28 h-36 bg-gray-100 rounded-md" />
+              <div>
+                <div className="text-sm text-slate-700">VISWESWARAIAH-RESUME.pdf</div>
+                <a
+                  href={resumeUrl}
+                  download
+                  className="mt-3 inline-flex items-center px-4 py-2 bg-gradient-to-r from-sky-600 to-violet-600 text-white rounded-lg"
+                >
+                  Download Resume
+                </a>
+              </div>
             </div>
-            <a
-              href={resumeUrl}
-              download
-              className="mt-3 inline-block bg-sky-600 text-white px-3 py-2 rounded-md hover:bg-sky-700"
-            >
-              Download Resume
-            </a>
           </div>
 
-          <div className="bg-white p-4 rounded-lg shadow-sm">
+          <div className="bg-white p-5 rounded-xl shadow border border-slate-200">
             <h3 className="text-lg font-semibold">Contact</h3>
-            <p className="mt-2 text-sm text-gray-600">I'm open to full-time roles in software development and applied AI.</p>
-
-            <div className="mt-4 space-y-3">
-              <div>
-                <div className="text-xs text-gray-500">Email</div>
-                <div className="flex items-center gap-2">
-                  <a href="mailto:svisw003@fiu.edu" className="text-gray-800 font-medium">svisw003@fiu.edu</a>
-                  <button
-                    onClick={() => navigator.clipboard?.writeText("svisw003@fiu.edu")}
-                    className="ml-2 text-xs px-2 py-1 border rounded text-sky-600 hover:bg-sky-50"
-                  >
-                    Copy
-                  </button>
-                </div>
-              </div>
-
-              <div>
-                <div className="text-xs text-gray-500">LinkedIn</div>
-                <a href="http://www.linkedin.com/in/srushti-v-9430291a2" target="_blank" rel="noreferrer" className="text-sky-600 hover:underline">View profile</a>
-              </div>
-
-              <div>
-                <div className="text-xs text-gray-500">Phone</div>
-                <div className="text-gray-800">+1 786-678-3505</div>
-              </div>
-
+            <p className="mt-1 text-slate-600">Open to full-time roles in software development and applied AI.</p>
+            <div className="mt-4">
+              <div className="text-xs text-slate-500">Email</div>
+              <div className="text-slate-800 font-medium">svisw003@fiu.edu</div>
+              <div className="mt-3 text-xs text-slate-500">LinkedIn</div>
+              <a href="http://www.linkedin.com/in/srushti-v-9430291a2" className="text-sky-600">View profile</a>
+              <div className="mt-3 text-xs text-slate-500">Phone</div>
+              <div className="text-slate-800">+1 786-678-3505</div>
             </div>
           </div>
         </section>
 
-        <footer className="mt-12 text-center text-sm text-gray-500">
+        <footer className="text-center text-sm text-slate-500">
           © {new Date().getFullYear()} Srushti Visweswaraiah — Built with React & Tailwind
         </footer>
       </main>
-
-      <a
-        href="mailto:svisw003@fiu.edu"
-        className="fixed bottom-6 right-6 bg-sky-600 text-white px-4 py-2 rounded-full shadow-lg hidden sm:inline-flex"
-      >
-        Email
-      </a>
     </div>
   );
 }

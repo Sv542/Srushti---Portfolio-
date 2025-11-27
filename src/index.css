@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-html, body, #root {
-  height: 100%;
+html, body, #root { height: 100%; }
+
+.border-gradient-to-r {
+  background-image: linear-gradient(to right, rgba(59,130,246,0.08), rgba(139,92,246,0.08));
 }
